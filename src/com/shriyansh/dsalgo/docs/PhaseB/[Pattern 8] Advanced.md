@@ -93,8 +93,70 @@ Input: words=[n, ninja, ninj, nin, ni, ninga]
 Sol: Insert all words. Then for each word check if isEnd is marked true for each of its charatcer. Find maximum such word. 
 ```
 
+## B. Disjoint Set Union
+This is a graph data structure that can have multiple components. Each component is stored as spanning tree and each node has some parent representative
+DSU is a data structure that provides following set of query interfaces apart from adding a node
+1. find if two nodes are in same component i.e. same parent
+2. Join two components or add a node to component
 
-## A. Segment Tree
+The parent point to itself for parent, if component has single node, then that node is parent of itself
+
+Since nodes in a component follow hierarchy till the representative parent, finding representative parent can be like traversing long chain.
+Path compression shortens this by making this representative as direct parent of all nodes in that component, hence reducing parent finding query time
+
+### I. Union by rank with path compression
+
+```kotlin
+class Item(
+    val data: Node,
+    var parent: Item?,
+    var rank: Int
+)
+class DSU(nodes: List<Node>) {
+    var map: MutableMap<Node, Item> = HashMap()
+
+    init {
+        for (node in nodes) {
+            val item = Item(node, null, 0)
+            item.parent = item
+            map[node] = item
+        }
+    }
+    
+    fun add(node: Node) {
+        val item = Item(node, null, 0)
+        item.parent = item
+        map[node] = item
+    }
+    
+    fun findParent(node: Node): Item {
+        val setItem = map[node]!!
+        if (setItem == setItem.parent) { return setItem }
+        // Path compression
+        setItem.parent = findSet(setItem.parent) // This compresses path for each node in the hierarchy
+        return setItem.parent!!
+    }
+    
+    fun union(first: Node, second: Node) {
+        val firstParent = findParent(first)
+        val secondParent = findParent(second)
+        // They are already part of same component
+        if (firstParent == secondParent) { return }
+        
+        // Smaller component takes larger one as its parent
+        if (firstParent.rank >= secondParent.rank) {
+            secondParent.parent = firstParent
+        } else {
+            firstParent.parent = secondParent
+        }
+        // increase rank only if equal
+        if (firstParent.rank == secondParent.rank) { firstParent.rank++ }
+    }
+}
+```
+
+
+## C. Segment Tree
 This is used to support queries like sum/min/max between two given positions in an array.
 
 The tree representation is same as in Heap, i.e. array based binary tree with following references
