@@ -431,3 +431,35 @@ fun isPalindrome(string: String, i: Int, j: Int): Boolean {
 ### X. Others
 
 
+### Greedy vs DP
+
+Here’s a detailed comparison between **Greedy Algorithms** and **Dynamic Programming (DP)**:
+
+| **Aspect**                | **Greedy Algorithms**                                  | **Dynamic Programming (DP)**                                  |
+|---------------------------|---------------------------------------------------------|---------------------------------------------------------------|
+| **Approach**               | Makes the **locally optimal** choice at each step with the hope of finding a global optimum. | Solves problems by solving **overlapping subproblems** and combining their solutions to find the global optimum. |
+| **Optimality Guarantee**   | Does not guarantee an optimal solution for all problems. It only works when a **greedy choice property** and **optimal substructure** hold. | Guarantees an optimal solution for problems that have both **optimal substructure** and **overlapping subproblems**. |
+| **Problem Type**           | Suitable for problems where making local choices leads to a globally optimal solution. | Used for problems with optimal substructure and overlapping subproblems, such as optimization problems. |
+| **Decision Process**       | Makes a **single decision** at each step and does not reconsider previous decisions. | **Breaks the problem** into subproblems, stores the solutions to subproblems, and combines them to build up the final solution. |
+| **Complexity**             | Usually **faster** because it makes decisions in a greedy manner without considering all possible choices. | **Slower** than greedy, as it stores and computes solutions to overlapping subproblems (e.g., O(n^2) or O(n^3) time complexity). |
+| **Memory Usage**           | Typically uses **constant space** (not considering the input size). | Requires **additional space** to store solutions to subproblems (e.g., arrays, matrices). |
+| **Example Problems**       | **Huffman Coding**, **Greedy Knapsack**, **Prim’s Algorithm**, **Dijkstra’s Algorithm (for shortest path in a graph)**. | **Fibonacci sequence**, **0/1 Knapsack problem**, **Longest Common Subsequence (LCS)**, **Matrix Chain Multiplication**. |
+| **Solution Building**      | **Builds the solution incrementally**, based on the greedy choices made at each step. | **Builds the solution** by solving and combining solutions to smaller subproblems (either through memoization or tabulation). |
+| **Backtracking**           | No backtracking—once a decision is made, it is not revisited. | Solutions are built by considering subproblems and may revisit or adjust decisions (via memoization). |
+| **Time Complexity**        | Typically **faster**, **O(n)** or **O(n log n)**, as each decision is made once without revisiting. | Typically **slower**, **O(n^2)** or higher, as it solves and stores multiple subproblems. |
+| **Correctness**            | **Not guaranteed** to be correct for all problems; only works if the problem has the "greedy choice property" and "optimal substructure." | **Guaranteed** to be correct if the problem has overlapping subproblems and optimal substructure. |
+| **Example Comparison**     | **Greedy Knapsack Problem**: Choose items that maximize value per unit weight without revisiting choices. | **0/1 Knapsack Problem**: Consider all possible combinations of items and choose the combination that maximizes value while staying within the weight limit. |
+
+### Key Differences:
+1. **Greedy Algorithms** make a local optimal choice at each step, aiming for a globally optimal solution, but they do not always guarantee the best solution.
+2. **Dynamic Programming** solves complex problems by breaking them into smaller subproblems, storing the results of subproblems, and combining them, ensuring an optimal solution.
+
+### In Summary:
+- **Greedy Algorithms** are faster and simpler but only work for problems where local optimal decisions lead to a global optimum.
+- **Dynamic Programming** is more robust and guarantees an optimal solution for problems with overlapping subproblems but often comes at the cost of more time and space complexity.
+
+Would you like a deeper dive into any of these algorithms?
+
+Example. Swap digits to make largest number. If duplicates are there then greedy does not work and requires DP
+
+

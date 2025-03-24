@@ -238,6 +238,9 @@ Can be solved via both BFS/DFS, BFS preferred
 Remember edge case where source color is same as required color, return
 ```
 
+### Components
+Counting components in matrix graph
+
 #### Question
 ```ignorelang
 Number of islands in a grid of 1 and 0
@@ -276,15 +279,14 @@ Example
 Input: grid = [[2,1,1],[1,1,0],[0,1,1]]
 Output: 4
 
-Hint: BFS, counting levels for each new rotten source (island), taking maximum of levels for each island. Here levels is same as minutes
-You can also think of this question as maximum level island in a grid
+Hint: BFS, counting levels for each new rotten source. Here levels is same as minutes
 
 Multisource BFS: In case a single island has multiple oranges, we need to process them paralleley. Called multisource BFS
 This way you process level for all source first and then move for level two of them and so on
 This just requires pushing all sources in the queue initially and then bfs implementation will take care of it.
-Multisource also takes case of islands
+Multisource also takes care of multiple components
 
-Edge case: If there is a island of fresh oranges only return -1
+Edge case: If there are still fresh oranges after traversal return -1. This would be because of fresh orange island
 
 This question disguises BFS as minutes, also uses multisource BFS and hence a good question. Graph is already disguised as matrix
 ```
